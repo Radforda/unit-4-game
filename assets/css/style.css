@@ -1,7 +1,15 @@
 .image:hover{border:2px solid black;}
 .row{
-    margin:10px;
-    text-align:center}
+    margin-bottom:20px;
+    text-align:center;
+    margin:auto;}
+#instructions{margin-bottom:20px}
+
+
+.image{display:inline-block;
+align-items: center}
+
+#gamePlay{text-align:center;}
 p{margin:auto;
     font-family: "Avant Garde", "Avantgarde", "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
     font-size: 30px;
@@ -22,7 +30,7 @@ p{margin:auto;
         text-align: center;
         text-transform: uppercase;
         text-rendering: optimizeLegibility;
-        margin:0;
+        margin:auto;
     }
         
         .elegantshadow {

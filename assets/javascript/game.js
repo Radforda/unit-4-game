@@ -1,27 +1,27 @@
 
 var han={name:"han",image: "assets/images/han.jpg",
-attackPoints:30,
-counterPoints:20,
-health:1000,
+attackPoints:8,
+counterPoints:10,
+health:120,
 card:'<div class="card image" id="han" class="col-md-3"><img class="card-img-top" src="assets/images/han.jpg" alt="Card image cap"><div class="card-body">  <p class="card-text hanText"></p></div></div>',updateStatus:function(){$(".hanText").text("Han Solo  Health:"+han.health)}};
 
 var kylo={name:"kylo",image: "assets/images/kylo.jpg",
-attackPoints:30,
-counterPoints:20,
+attackPoints:40,
+counterPoints:5,
 health:100,
 card:'<div class="card image" id="kylo" class="col-md-3"><img class="card-img-top" src="assets/images/kylo.jpg" alt="Card image cap"><div class="card-body">  <p class="card-text kyloText"></p></div></div>',updateStatus:function(){$(".kyloText").text("Kylo Ren  Health:"+kylo.health)}};
 
 var leia={name:"leia", image: "assets/images/leia.jpg",
-attackPoints:30,
+attackPoints:8,
 counterPoints:20,
-health:100,
+health:150,
 card:'<div class="card image" id="leia"class="col-md-3"><img class="card-img-top" src="assets/images/leia.jpg" alt="Card image cap"><div class="card-body">  <p class="card-text leiaText"></p></div>',
 updateStatus:function(){$(".leiaText").text("Leia  Health:"+leia.health)}};
 
 var yoda={name:"yoda", image: "assets/images/yoda.jpg",
-attackPoints:30,
-counterPoints:20,
-health:100,
+attackPoints:-20,
+counterPoints:25,
+health:180,
 card:'<div class="card image" id="yoda" class="col-md-3"><img class="card-img-top" src="assets/images/yoda.jpg" alt="Card image cap"><div class="card-body">  <p class="card-text yodaText"></p></div></div>',
 updateStatus:function(){$(".yodaText").text("Yoda   Health:"+yoda.health)}};
 
@@ -147,19 +147,23 @@ function onDeck(opp){
     $("#fightButton").off().on("click",function(){
         console.log("fight me");
         opponant.health-=player.attackPoints;
-        player.health-=opponant.counterPoints;$("#gamePlay").text("you attacked "+opponant.name+" with "+player.attackPoints+" HP and reduced his health to "+opponant.health+".  "+opponant.name+" counter attacked with "+opponant.counterPoints+"HP and reduced your health to "+player.health+"!");
+        player.health-=opponant.counterPoints;
+        $("#gamePlay").text("you attacked "+opponant.name+" with "+player.attackPoints+" HP and reduced his health to "+opponant.health+".  "+opponant.name+" counter attacked with "+opponant.counterPoints+"HP and reduced your health to "+player.health+"!");
         $("#hanText").html('<p class="card-text"id="hanText">Hi this is new!:</p>');
         player.updateStatus();
         opponant.updateStatus();
-        player.attackpoints+=6;
+        player.attackPoints=player.attackPoints+8;
 
 
         if(opponant.health<1){
+            player.health+=opponant.counterPoints;
+            player.updateStatus();
             $("#EnemyCharactor").html("");
             show(opponant.name);
             $("#fightButton").html("");
             $("#gamePlay").text(opponant.name+" was Defeated!!");
             defeated++;
+            $("#instructions").text("Select your Opponant!");
             $("#charactors").show();
             console.log(defeated);
             if (defeated===3){
@@ -191,6 +195,7 @@ function onDeck(opp){
 
 function reset(){
     $("#charactors").show();
+    $("#EnemyCharactor").html("");
     $("#fightButton").html("");
     defeated=0;
     gameStatus="not started";
@@ -198,9 +203,15 @@ function reset(){
     $("#instructions").html("Select Your Charactor!");
     $("#gamePlay").html("");
     kylo.health=100;
-    leia.health=100;
-    yoda.health=100;
-    han.health=1000;
+    leia.health=150;
+    yoda.health=180;
+    han.health=120;
+
+    kylo.attackPoints=30;
+    leia.attackPoints=8;
+    yoda.attackPoints=0;
+    han.attackPoints=8;
+
     $("#yoda2").hide();
    $("#kylo2").hide();
    $("#han2").hide();
